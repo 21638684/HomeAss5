@@ -1,0 +1,44 @@
+﻿@using HomeAss5.Models
+@model List<BookDetailsVM>
+@{
+    ViewBag.Title = "Book details";
+}
+<h1>@foreach (BookDetailsVM book in Model)
+{@book.Book}</h1>
+
+<div>
+    <a href="@Url.Action("Students","Home")" class="btn btn-primary">View Students</a>
+</div>
+
+<div>
+    <table class="table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Taken date</th>
+                <th>Broungt date</th>
+                <th>Borrowed By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BookDetailsVM bookBrw in Model)
+            {
+                <tr>
+                    <td>@bookBrw.ID</td>
+                    <td>@bookBrw.Takendate</td>
+                    <td>@bookBrw.Returndate</td>
+                    <td>@bookBrw.Student</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+<style>
+    table {
+        width: 100%
+    }
+    button{
+        width:100%
+    }
+</style>

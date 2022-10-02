@@ -1,0 +1,73 @@
+﻿@using HomeAss5.Models
+@model List<StudentViewModel>
+@{
+    ViewBag.Title = "Students";
+}
+
+<h1>Students</h1>
+
+<div>
+<div>
+    @using (Html.BeginForm("GetStudentByNameClass", "Home", FormMethod.Post))
+    {
+        <table class="table-responsive">
+            <tr>
+                <td>
+                    @Html.TextBox("Searchvalue", null, new { Class = "form-control", placeholder = "Search Student Name" })
+                </td>
+                <td>
+                    <select class="form-control" name="type">
+                        <option value="0">Select a Class</option>
+                        @foreach (var Sclass in Model)
+                        {
+                            <option value="@Sclass.Class">@Sclass.Class</option>
+                        }
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="submit" value="Search" class="btn btn-success" />
+                </td>
+                <td>
+                    <input type="reset" value="Clear" class="btn btn-danger" />
+                </td>
+            </tr>
+        </table>
+    }
+    
+</div>
+
+<div>
+    <table class="table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Surname</th>
+                <th>Class</th>
+                <th>Points</th>
+                <th>Return Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+            <tr>
+                <td>@student.StudentId</td>
+                <td>@student.Name</td>
+                <td>@student.Class</td>
+                <td>@student.Points</td>
+                <td>
+                    <a href="@Url.Action("BookDetails", "Home")" class="btn btn-primary btn-lg">Borrow Book</a>
+                </td>
+            </tr>
+           
+        } 
+            </tbody>
+        </table>
+    </div>
+    </div>
+<style>
+    table {
+        width: 100%
+    }
+</style>

@@ -1,0 +1,85 @@
+﻿@using HomeAss5.Models
+@model List<BooksViewModel>
+@{
+    ViewBag.Title = "Books";
+}
+
+<h1>Books</h1>
+
+<div>
+    @using (Html.BeginForm("GetBookByNameTypeAuthor","Home",FormMethod.Post))
+        { 
+    <table class="table-hover ">
+        <tr>
+            <td>
+                @Html.TextBox("Searchvalue", null, new {Class="form-control",placeholder="Search Book Name"})
+            </td>
+            <td>
+                <select class="form-control" name="type">
+                    <option value="0">Select a Type</option>
+                    @foreach(var type in Model)
+                {
+                    <option value="@type.Type">@type.Type</option>
+                }
+                </select>
+            </td>
+            <td>
+                <select class="form-control" name="type">
+                    <option value="0">Select an Author</option>
+                    @foreach (var author in Model)
+                    {
+                        <option value="@author.Author">@author.Author</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Search" class="btn btn-success" />
+            </td>
+            <td>
+                <input type="reset" value="Clear" class="btn btn-danger" />
+            </td>
+        </tr>
+    </table>
+}
+</div>
+
+<div>
+    <table class="table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Type</th>
+                <th>Page Count</th>
+                <th>Points</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (BooksViewModel record in Model)
+        {
+<tr>
+    <td>@record.BookId</td>
+    <td>@record.Name</td>
+    <td>@record.Author</td>
+    <td>@record.Type</td>
+    <td>@record.PageCount</td>
+    <td>@record.Points</td>
+    <td class="text-success">Available</td>
+    
+    <td>
+        <a href="@Url.Action("BookDetails","Home")" class="btn btn-primary">View</a>
+    </td>
+</tr>}
+            </tbody>
+    </table>
+    
+</div>
+<style>
+    table {
+        width:100%
+
+    }
+</style>
